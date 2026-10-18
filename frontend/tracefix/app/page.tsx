@@ -27,7 +27,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-const API = "http://localhost:8000";
+const API = process.env.NEXT_PUBLIC_TRACEFIX_API_URL || "http://localhost:8000";
 
 type Data = Record<string, unknown>;
 
@@ -460,30 +460,20 @@ export default function Home() {
 
         {/* Investigation metrics */}
         <MetricsGrid
-          hasResult={Boolean(result)}
-          servicesCount={
-            result
-              ? String(
-                  new Set(
-                    graphEdges.flatMap((edge) => [
-                      edge.source_id ?? edge.source,
-                      edge.target_id ?? edge.target,
-                    ]),
-                  ).size,
-                )
-              : "—"
-          }
-          rootCause={
-            result
-              ? text(
-                  trigger?.target_name ?? trigger?.target_id,
-                  "Not identified",
-                )
-              : "—"
-          }
-          relationshipCount={result ? String(graphEdges.length) : "—"}
-          historicalMatches={result ? String(baseline.length) : "—"}
-        />
+  observationsCount={result ? observations.length : 0}
+  relationshipCount={result ? graphEdges.length : 0}
+  historicalMatches={result ? baseline.length : 0}
+  trigger={
+    result
+      ? text(
+          trigger?.target_name ??
+            trigger?.target_id ??
+            trigger?.summary,
+          "Not identified",
+        )
+      : "—"
+  }
+/>
 
         {result && (
           <section className="mb-5 overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#101923]">

@@ -47,6 +47,14 @@ app.add_middleware(
 def get_store() -> GraphStore:
     return GraphStore()
 
+@app.on_event("startup")
+def seed_empty_demo_graph() -> None:
+    store = get_store()
+    rows = store.query("MATCH (n) RETURN count(n) AS node_count")
+    node_count = int(rows[0]["node_count"]) if rows else 0
+
+    if node_count == 0:
+        store.reset_and_seed()
 
 class InvestigationRequest(BaseModel):
     incident_id: str = Field(min_length=1, max_length=100)
