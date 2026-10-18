@@ -1,8 +1,10 @@
 
 "use client";
 
-import { Database, RefreshCw, Network } from "lucide-react";
+import Image from "next/image";
+import { Database, RefreshCw } from "lucide-react";
 import Link from "next/link";
+
 type Status = "checking" | "online" | "offline";
 
 function StatusPill({
@@ -51,15 +53,27 @@ export default function AppHeader({
         aria-label="TraceFix home"
         className="group flex shrink-0 items-center gap-3 rounded-lg focus-visible:outline focus-visible:outline-cyan-300"
       >
-        <span className="grid h-10 w-10 place-items-center rounded-xl border border-cyan-300/20 bg-cyan-300/[.07] text-cyan-200 transition-colors group-hover:bg-cyan-300/[.12]" aria-hidden="true">
-          <Network size={21} strokeWidth={1.8} />
+        <span
+          className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl border border-cyan-300/20 bg-cyan-300/[.07] transition-colors group-hover:bg-cyan-300/[.12]"
+          aria-hidden="true"
+        >
+          <Image
+            src="/logo.png"
+            alt=""
+            width={40}
+            height={40}
+            priority
+            className="h-full w-full object-contain p-1"
+          />
         </span>
 
         <div className="flex flex-col">
           <span className="text-lg font-semibold tracking-tight text-neutral-100">
             Trace<span className="text-cyan-300">Fix</span>
           </span>
-          <span className="text-[10px] font-medium tracking-wide text-slate-500">Incident intelligence</span>
+          <span className="text-[10px] font-medium tracking-wide text-slate-500">
+            Incident intelligence
+          </span>
         </div>
       </Link>
 
