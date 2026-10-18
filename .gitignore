@@ -1,5 +1,31 @@
+# Python virtual environments
 .venv/
+venv/
+
+# Python generated files
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Environment secrets
 .env
+.env.*
+!.env.example
+
+# Streamlit secrets
 .streamlit/secrets.toml
+
+# Next.js generated files
+node_modules/
+.next/
+out/
+coverage/
+
+# Logs and operating system files
+*.log
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.idea/
